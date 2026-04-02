@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ujian OSN Bahasa Inggris - KKG Ngasem</title>
+    <style>
+        :root { 
+            --primary: #4e73df; 
+            --success: #1cc88a; 
+            --danger: #e74a3b; 
+            --bg: #f8f9fc; 
+            --dark: #5a5c69; 
+            --secondary: #858796; 
+        }
+
+        /* Perbaikan CSS Logo agar rapi di tengah */
+        .logo-header {
+            display: block;
+            margin: 0 auto 15px auto;
+            max-width: 100px;
+            height: auto;
+        }
+
+        body { font-family: 'Segoe UI', sans-serif; background-color: var(--bg); display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .quiz-container { background: white; width: 100%; max-width: 800px; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; }
+        .hidden { display: none !important; }
+        
+        #timer-wrapper { position: absolute; top: 20px; right: 30px; text-align: right; }
+        #timer-display { font-size: 1.1rem; font-weight: bold; color: var(--danger); background: #fff1f0; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--danger); }
+
+        .passage { background: #f1f3f9; border-left: 5px solid var(--primary); padding: 15px; margin-bottom: 20px; line-height: 1.6; font-size: 0.95rem; border-radius: 5px; color: #444; }
+        .question-image { width: 100%; max-width: 400px; height: auto; display: block; margin: 20px auto; border-radius: 10px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); border: 1px solid #ddd; }
+        .question-text { font-size: 1.15rem; font-weight: bold; margin-bottom: 20px; color: var(--dark); line-height: 1.6; }
+        
+        .option { display: block; width: 100%; padding: 14px; margin-bottom: 12px; border: 2px solid #eaecf4; border-radius: 10px; background: white; text-align: left; cursor: pointer; transition: 0.2s; font-size: 1rem; }
+        .option:hover { border-color: var(--primary); background: #f8f9ff; }
+        .option.selected { background: var(--primary); color: white; border-color: var(--primary); }
+
+        .nav-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 8px; margin-top: 30px; padding-top: 20px; border-top: 2px solid #eee; }
+        .nav-num { padding: 10px 0; border: 1px solid #ddd; border-radius: 5px; text-align: center; cursor: pointer; font-size: 0.85rem; font-weight: bold; background: white; color: #888; }
+        .nav-num.current { border-color: var(--primary); background: #f0f4ff; color: var(--primary); border-width: 2px; }
+        .nav-num.answered { background: var(--secondary); color: white; border-color: var(--secondary); }
+        .nav-num.current.answered { background: var(--primary); color: white; }
+
+        .btn-group { display: flex; gap: 10px; margin-top: 20px; }
+        .btn { flex: 2; padding: 15px; border: none; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-secondary { flex: 1; background: var(--secondary); color: white; }
+        input#username { width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 8px; border: 2px solid #ddd; font-size: 1rem; box-sizing: border-box; }
+    </style>
+</head>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSK Bahasa Inggris 2026</title>
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #34495e;
+            --accent: #3498db;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --light: #ecf0f1;
+        }
+
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; margin: 0; padding: 20px; }
+        
+        .quiz-container { 
+            max-width: 800px; 
+            margin: auto; 
+            background: white; 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
+        }
+
+        .logo-header { 
+            display: block; 
+            margin: 0 auto 15px; 
+            max-width: 100px; 
+            height: auto; 
+        }
+
+        /* Ukuran logo lebih kecil saat mengerjakan soal agar hemat ruang */
+        #quiz-screen .logo-header { max-width: 70px; margin-bottom: 10px; }
+
+        hr { border: 0; height: 1px; background: #ddd; margin: 20px 0; }
+        .hidden { display: none; }
+
+        #timer-wrapper { 
+            background: var(--primary); 
+            color: white; 
+            padding: 10px; 
+            border-radius: 8px; 
+            text-align: center; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            margin-bottom: 20px;
+        }
+
+        .passage { 
+            background: #f9f9f9; 
+            padding: 15px; 
+            border-left: 5px solid var(--accent); 
+            margin-bottom: 20px; 
+            line-height: 1.6;
+        }
+
+        .question-image { 
+            display: block; 
+            max-width: 100%; 
+            height: auto; 
+            margin: 15px auto; 
+            border-radius: 8px; 
+        }
+
+        .question-text { font-size: 1.2rem; font-weight: 600; margin-bottom: 20px; color: var(--primary); }
+
+        .option { 
+            display: block; 
+            width: 100%; 
+            text-align: left; 
+            padding: 12px 15px; 
+            margin-bottom: 10px; 
+            border: 2px solid #eee; 
+            border-radius: 8px; 
+            background: white; 
+            cursor: pointer; 
+            transition: 0.2s;
+        }
+
+        .option:hover { background: #f0f7ff; border-color: var(--accent); }
+        .option.selected { background: var(--accent); color: white; border-color: var(--accent); }
+
+        .btn-group { display: flex; justify-content: space-between; margin-top: 30px; gap: 10px; }
+        .btn { padding: 12px 25px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 1rem; }
+        .btn-primary { background: var(--accent); color: white; }
+        .btn-secondary { background: #95a5a6; color: white; }
+
+        .nav-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(35px, 1fr)); 
+            gap: 8px; 
+            margin-top: 30px; 
+            padding-top: 20px; 
+            border-top: 1px solid #eee;
+        }
+
+        .nav-num { 
+            height: 35px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border: 1px solid #ccc; 
+            border-radius: 4px; 
+            cursor: pointer; 
+            font-size: 0.9rem;
+        }
+
+        .nav-num.answered { background: var(--success); color: white; border-color: var(--success); }
+        .nav-num.current { border: 2px solid var(--primary); font-weight: bold; transform: scale(1.1); }
+
+        input[type="text"] { 
+            width: 100%; 
+            padding: 12px; 
+            margin-bottom: 15px; 
+            border: 1px solid #ccc; 
+            border-radius: 6px; 
+            box-sizing: border-box;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="quiz-container">
+    <div id="login-screen">
+        <img src="https://awsimages.detik.net.id/community/media/visual/2023/05/02/lambang-tut-wuri-handayani.png?w=700&q=90" class="logo-header" alt="Logo">
+        <h2 style="text-align:center; color: var(--primary); margin-top: 0;">SELEKSI OSK IPS TAHUN 2026</h2>
+        <h4 style="text-align:center; color: var(--secondary); margin-top:-10px;">KKG KELAS KECAMATAN NGASEM</h4>
+        <hr>
+        <p style="text-align:center;">Waktu: <b>20 Menit</b> | Total: <b>40 Soal</b></p>
+        <input type="text" id="username" placeholder="Masukkan Nama Lengkap Anda...">
+        <button class="btn btn-primary" style="width:100%" onclick="startQuiz()">Mulai Ujian</button>
+    </div>
+
+    <div id="quiz-screen" class="hidden">
+        <img src="https://awsimages.detik.net.id/community/media/visual/2023/05/02/lambang-tut-wuri-handayani.png?w=700&q=90" class="logo-header" alt="Logo">
+        
+        <div id="timer-wrapper"><div id="timer-display">20:00</div></div>
+        <div id="progress" style="margin-bottom:15px; font-weight:bold; color: var(--primary);"></div>
+        
+        <div id="passage-box" class="passage hidden"></div>
+        <img id="image-box" class="question-image hidden" src="">
+        <div id="question-box" class="question-text"></div>
+        <div id="options-box"></div>
+        
+        <div class="btn-group">
+            <button id="prev-btn" class="btn btn-secondary" onclick="prevQuestion()">Kembali</button>
+            <button id="next-btn" class="btn btn-primary" onclick="nextQuestion()">Lanjut</button>
+        </div>
+        <div class="nav-grid" id="nav-grid"></div>
+    </div>
+
+    <div id="result-screen" class="hidden" style="text-align:center">
+        <img src="https://awsimages.detik.net.id/community/media/visual/2023/05/02/lambang-tut-wuri-handayani.png?w=700&q=90" class="logo-header" alt="Logo">
+        <h2>Selesai! Skor Anda:</h2>
+        <h1 id="final-score" style="font-size: 5rem; color: var(--success);">0</h1>
+        <p id="status-upload" style="font-weight:bold;"></p>
+        <button class="btn btn-primary" onclick="location.reload()">Selesai / Keluar</button>
+    </div>
+</div>
+
+<script>
+    const DATABASE_URL = "https://script.google.com/macros/s/AKfycbwKO1xOJIPSCASJU1oab0Vj4pZc4Lf6FTl03ryO9bYhC57xDzQ5WtUSNaISmrz7VPJELA/exec";
+
+    const quizData = [
+        { q: "Jika dalam peta tertulis skala 1 : 350.000 maka setiap 1 cm pada peta, maka jarak sebenarnya adalah...", options: {a: "35 Km", b: "0,35 km", c: "350 Km", d: "3,5 km"}, ans: "d" },
+        { passage: "Hasan adalah anak desa yang rajin dan pandai, setiap berangkat sekolah dia jarang sarapan pagi dan tidak pernah memperoleh uang saku, setelah pulang sekolah Hasan menyabit rumput untuk makan kedua kambingnya  karena kedua orang tuanya sibuk bekerja di sawah orang.", q: "Ilustrasi tersebut menunjukkan keadaan ekonomi keluarga Hasan...", options: {a: "tercukupi", b: "serba kekurangan", c: "berlebihan", d: "serba ada"}, ans: "b" },
+        { q: "Pasangan tokoh dan penemuannya yang tepat ditunjukkan oleh nomor ….", image: "https://media.quizizz.com/_mdserver/main/media/resource/gs/quizizz-media/quizzes/7b9111e7-2eae-4da6-b832-3260299d4305-v2", options: {a: "1", b: "2", c: "3", d: "4"}, ans: "a" },
+        { q: "Mr. Ahmad Soebarjo merupakan tokoh golongan tua yang berperan penting dalam persiapan kemerdekaan. Peran beliau adalah...", options: {a: "mengibarkan bendera merah putih", b: "mengetik naskah proklamasi", c: "menyusun konsep teks proklamasi", d: "menandatangani naskah proklamasi"}, ans: "c" },
+        { q: "Dari tabel di atas yang merupakan barang-barang hasil pertanian yang di ekspor oleh negara Indonesia adalah .…", image: "https://media.quizizz.com/_mdserver/main/media/resource/gs/quizizz-media/quizzes/f59a6f20-4b4c-4afb-b196-8a8de7d15492-v2", options: {a: "1, 2, dan 4", b: "1, 3, dan 5", c: "2, 3, dan 4", d: "2, 4, dan 5"}, ans: "a" },
+        { q: "Gambar sebagian atau keseluruhan permukaan bumi dengan perbandingan tertentu disebut...", options: {a: "atlas", b: "globe", c: "peta", d: "majalah"}, ans: "c" },
+        { q: "Wilayah laut Indonesia lebih luas dibandingkan daratnya. Oleh karena itu Indonesia disebut sebagai negara...", options: {a: "agraris", b: "maritim", c: "kepulauan", d: "seribu candi"}, ans: "b" },
+        { q: "Bisnis ritel merupakan usaha ekonomi dalam bidang...", options: {a: "perdagangan", b: "pertambangan", c: "agraris", d: "peternakan"}, ans: "a" },
+        { q: "Tujuan utama bangsa Spanyol dan Portugis datang ke nusantara dikenal dengan semboyan...", options: {a: "God, Glory, Gulden", b: "Gold, Gamstone, Golf", c: "Gold, Glory, Gospel", d: "Gulden, Murgen, Gospel"}, ans: "c" },
+        { q: "Tokoh yang dikenal karena perannya sebagai Perdana Menteri pertama Indonesia dan dikenal dengan perjuangannya dalam melakukan diplomasi internasional untuk mendapatkan pengakuan kemerdekaan Indonesia adalah….", options: {a: "Soekarno", b: "Mohammad Hatta", c: "Agus Salim", d: "Sutan Sjahrir"}, ans: "d" },
+        { q: "Tindak kriminalitas di lingkungan sekitar saat ini telah melibatkan banyak remaja di bawah umur. Kondisi tersebut memunculkan kekhawatiran bagi masyarakat yang ingin beraktivitas di luar rumah, khususnya pada malam hari. Hal ini karena munculnya rasa ancaman di tengah masyarakat bahwa hal tersebut dapat mengancam siapa saja. Berdasarkan kondisi tersebut bentuk penyimpangan sosial yang terjadi yaitu ....", options: {a: "Pelecehan seksual", b: "Penyimpangan individual", c: "Kejahatan jalanan", d: "Penyimpangan primer"}, ans: "c" },
+        { q: "Faktor geografis yang sangat memengaruhi penyebaran dan kepadatan penduduk adalah...", options: {a: "ketersediaan akses sumber air bersih", b: "tingkat kepadatan penduduk yang tinggi", c: "akses transportasi yang baik ke penjuru kota", d: "adanyaa pusat-pusat ekonomi dan jasa"}, ans: "a" },
+        { q: "Affandi dikenal sebagai seorang pengusaha sukses di Jakarta. Affandi merupakan lulusan sarjana ekonomi dan melanjutkan kuliah S2 di jurusan Manajemen. Dengan latar belakang pendidikannya tersebut, Affandi mendapatkan jabatan sebagai direktur. Hal tersebut membuatnya sangat disegani oleh karyawannya. Berdasarkan ilustrasi tersebut, saluran mobilitas sosial yang membuat Affandi naik dalam kelas sosial adalah ....", options: {a: "lembaga agama", b: "lembaga politik", c: "lembaga sosial", d: "lembaga Pendidikan"}, ans: "d" },
+        { q: "Indonesia dan Thailand bekerja sama dalam bidang perdagangan beras, hal ini termasuk kerja sama bidang...", options: {a: "sosial", b: "politik", c: "ekonomi", d: "teknologi"}, ans: "c" },
+        { q: "Kerajaan Hindu tertua di Indonesia adalah...", options: {a: "Majapahit", b: "Sriwijaya", c: "Kutai", d: "Singasari"}, ans: "c" },
+        { q: "Indonesia dikenal sebagai negara kepulauan yang memiliki banyak selat. Selat yang memisahkan Pulau Jawa dan Pulau Sumatra adalah...", options: {a: "Selat Sunda", b: "Selat Lombok", c: "Selat Malaka", d: "Selat Makassar"}, ans: "a" },
+        { q: "Organisasi yang dianggap sebagai pelopor kebangkitan nasional dan perjuangan secara nasional adalah...", options: {a: "Budi Utomo", b: "Sarekat Islam", c: "PNI", d: "Indische Partij"}, ans: "a" },
+        { q: "Untuk dapat menghargai peninggalan sejarah, kita terlebih dahulu wajib memahami...", options: {a: "guru sejarah", b: "peristiwa Sejarah", c: "pelajaran sejarah", d: "jenis peninggalan"}, ans: "b" },
+        { q: "Raja Purnawarman adalah raja yang terkenal dari kerajaan...", options: {a: "Kutai", b: "Kalingga", c: "Tarumanegara", d: "Singosari"}, ans: "c" },
+        { q: "Bentuk kolaborasi negara-negara ASEAN dalam bidang olah raga dua tahunan adalah...", options: {a: "ASIAN Games", b: "ASEAN Games", c: "SEA Games", d: "ASIA Games"}, ans: "c" },
+        { q: "Nilai luhur masyarakat untuk melindungi dan mengelola lingkungan hidup secara lestari disebut...", options: {a: "kearifan lokal", b: "suku", c: "nenek moyang", d: "sejarah"}, ans: "a" },
+        { q: "Indonesia terletak di antara dua benua dan dua samudra, yaitu ....", options: {a: "Asia dan Afrika; Hindia dan Atlantik", b: "Asia dan Australia; Hindia dan Pasifik", c: "Eropa dan Asia; Atlantik dan Pasifik", d: "Australia dan Amerika; Hindia dan Atlantik"}, ans: "b" },
+        { q: "Pada masa awal kemerdekaan, Kepulauan Nusa Tenggara disebut Provinsi...", options: {a: "Sunda Kecil", b: "Sunda Besar", c: "NTB", d: "NTT"}, ans: "a" },
+        { q: "Manusia adalah makhluk rasional yang berusaha seefisien mungkin dan sebaik-baiknya dalam memakai sumber daya alam untuk memenuhi kebutuhan hidupnya. Oleh karena itu manusia disebut sebagai makhluk ....", options: {a: "sosial", b: "budaya", c: "ekonomi", d: "individu"}, ans: "c" },
+        { q: "Faktor utama penyebab keanekaragaman suku bangsa, budaya, dan bahasa lokal di Indonesia adalah....", options: {a: "bangsa Indonesia dibangun dari berbagai macam ras", b: "kesamaan kondisi alam dari Sabang sampai Merauke", c: "nenek moyang bangsa Indonesia berasal dari berbagai daerah", d: "letak wilayah Indonesia yang sangat strategis"}, ans: "d" },
+        { q: "Bentuk badan usaha yang sesuai dengan pasal 33 ayat 1 UUD 1945 adalah...", options: {a: "koperasi", b: "BUMN", c: "swasta", d: "Firma"}, ans: "a" },
+        { q: "Nelayan bekerja menangkap ikan di laut, lalu menjual hasil tangkapannya ke pedagang di tempat pelelangan ikan. Dari tempat pelelangan, ikan dikirim ke pasar untuk dijual  ke penjual ikan. Sesampainnya disana, ikan akan dibeli oleh para konsumen untuk diolah menjadi menu makanan yang bergizi. Salah satu contoh kegiatan distribusi yang terjadi dalam kegiatan ekonomi tersebut adalah ….", options: {a: "nelayan menangkap ikan di laut", b: "nelayan menjual hasil tangkapannya ke pedagang di tempat pelelangan ikan", c: "nelayan membeli ikan di pasar", d: "konsumen mengolah ikan menjadi menu makanan yang bergizi"}, ans: "b" },
+        { q: "Bangka Belitung merupakan provinsi hasil pemekaran dari provinsi...", options: {a: "Lampung", b: "Sumatera Selatan", c: "Bengkulu", d: "Riau"}, ans: "b" },
+        { q: "Di Asia Tenggara, selain Indonesia, negara yang berbentuk kepulauan adalah...", options: {a: "Thailand", b: "Vietnam", c: "Filipina", d: "Laos"}, ans: "c" },
+        { q: "Faktor utama yang paling berpengaruh terjadinya perubahan sosial cepat saat ini adalah...", options: {a: "kemajuan teknologi", b: "menurunnya angka kelahiran", c: "stabilitas politik", d: "keengganan menerima perubahan"}, ans: "a" },
+        { q: "RA Kartini wafat dan dimakamkan di kota...", options: {a: "Jepara", b: "Blitar", c: "Rembang", d: "Purwodadi"}, ans: "c" },
+        { q: "Undang-Undang Dasar 1945 disahkan pada 18 Agustus 1945 oleh...", options: {a: "BPUPKI", b: "Komite Nasional", c: "PPKI", d: "Presiden Soekarno secara pribadi"}, ans: "c" },
+        { q: "Tokoh yang mengibarkan Bendera Merah Putih saat Proklamasi adalah...", options: {a: "Latief Hendraningrat dan S. Suhud", b: "Wikana dan Darwis", c: "Sayuti Melik", d: "Mohammad Hatta"}, ans: "a" },
+        { q: "Fort de Kock adalah salah satu nama peninggalan sejarah berupa...", options: {a: "Gereja", b: "Benteng", c: "Museum", d: "Gedung"}, ans: "b" },
+        { q: "Globalisasi ditandai dengan kemajuan pesat di bidang...", options: {a: "ilmu pengetahuan dan teknologi", b: "pertanian tradisional", c: "bahasa daerah", d: "perikanan darat"}, ans: "a" },
+        { q: "Berikut ini yang termasuk contoh komoditas pertanian unggulan adalah...", options: {a: "Kedelai", b: "Karet", c: "Batu Bara", d: "Emas"}, ans: "a" },
+        { q: "Dampak negatif dari arus globalisasi bagi kebudayaan lokal adalah...", options: {a: "masyarakat maju", b: "mudah bergaul", c: "bergesernya nilai-nilai luhur budaya", d: "informasi cepat"}, ans: "c" },
+        { q: "Sikap pelajar menghadapi globalisasi sebaiknya...", options: {a: "menolak semua budaya luar", b: "mengikuti tren tanpa filter", c: "belajar mengikuti kemajuan zaman dengan kritis", d: "bermain internet sesuka hati"}, ans: "c" },
+        { q: "Manfaat utama kegiatan ekspor-impor bagi negara kita adalah...", options: {a: "menambah utang", b: "mengurangi produksi", c: "menghasilkan devisa", d: "menambah beban APBN"}, ans: "c" }, // Tambahkan koma
+        { q: "Penyebab dari kerusakan lingkungan pesisir yang paling dominan antara lain . . .", options: {a: "Pencemaran sampah dan limbah oleh warga masyarakat tepi pantai", b: "Pembangunan pelabuhan dan pengembangan kawasan swasta", c: "tumpahan minyak bumi akibat kecelakaan kapal tanker", d: "pengembangan lahan tambak dari kawasan hutan mangrov"}, ans: "d" }
+    ];
+
+    let currentIdx = 0, userName = "", timeLeft = 20 * 60;
+    let userAnswers = new Array(quizData.length).fill(null);
+    let timerInterval;
+
+    function startQuiz() {
+        userName = document.getElementById('username').value.trim();
+        if(!userName) return alert("Silakan isi nama terlebih dahulu!");
+        document.getElementById('login-screen').classList.add('hidden');
+        document.getElementById('quiz-screen').classList.remove('hidden');
+        startTimer();
+        initGrid();
+        loadQuestion();
+    }
+
+    function startTimer() {
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            let min = Math.floor(timeLeft / 60);
+            let sec = timeLeft % 60;
+            document.getElementById('timer-display').innerText = `${min.toString().padStart(2,'0')}:${sec.toString().padStart(2,'0')}`;
+            if(timeLeft <= 0) { clearInterval(timerInterval); alert("Waktu habis!"); showResult(); }
+        }, 1000);
+    }
+
+    function initGrid() {
+        const grid = document.getElementById('nav-grid');
+        grid.innerHTML = "";
+        quizData.forEach((_, i) => {
+            const el = document.createElement('div');
+            el.className = 'nav-num';
+            el.id = `nav-${i}`;
+            el.innerText = i + 1;
+            el.onclick = () => { currentIdx = i; loadQuestion(); };
+            grid.appendChild(el);
+        });
+    }
+
+    function loadQuestion() {
+        const data = quizData[currentIdx];
+        document.getElementById('progress').innerText = `SOAL ${currentIdx + 1} DARI ${quizData.length}`;
+        
+        const iBox = document.getElementById('image-box');
+        if(data.image && data.image !== "") {
+            iBox.src = data.image;
+            iBox.classList.remove('hidden');
+        } else {
+            iBox.classList.add('hidden');
+            iBox.src = "";
+        }
+
+        const pBox = document.getElementById('passage-box');
+        if(data.passage) { pBox.innerHTML = data.passage; pBox.classList.remove('hidden'); }
+        else { pBox.classList.add('hidden'); }
+
+        document.getElementById('question-box').innerHTML = data.q;
+
+        const oBox = document.getElementById('options-box');
+        oBox.innerHTML = "";
+        for(let key in data.options) {
+            const btn = document.createElement('button');
+            btn.className = 'option' + (userAnswers[currentIdx] === key ? ' selected' : '');
+            btn.innerHTML = `<strong>${key.toUpperCase()}.</strong> ${data.options[key]}`;
+            btn.onclick = () => {
+                userAnswers[currentIdx] = key;
+                document.querySelectorAll('.option').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                updateGridStyles();
+            };
+            oBox.appendChild(btn);
+        }
+
+        document.getElementById('prev-btn').style.visibility = (currentIdx === 0) ? 'hidden' : 'visible';
+        document.getElementById('next-btn').innerText = (currentIdx === quizData.length - 1) ? "Selesai" : "Lanjut";
+        updateGridStyles();
+    }
+
+    function updateGridStyles() {
+        quizData.forEach((_, i) => {
+            const el = document.getElementById(`nav-${i}`);
+            if(el) {
+                el.classList.remove('current', 'answered');
+                if(i === currentIdx) el.classList.add('current');
+                if(userAnswers[i] !== null) el.classList.add('answered');
+            }
+        });
+    }
+
+    function nextQuestion() {
+        if(currentIdx < quizData.length - 1) { currentIdx++; loadQuestion(); }
+        else { if(confirm("Kumpulkan jawaban sekarang?")) { clearInterval(timerInterval); showResult(); } }
+    }
+
+    function prevQuestion() { if(currentIdx > 0) { currentIdx--; loadQuestion(); } }
+
+    function showResult() {
+        document.getElementById('quiz-screen').classList.add('hidden');
+        document.getElementById('result-screen').classList.remove('hidden');
+
+        let correctCount = 0;
+        userAnswers.forEach((ans, i) => { if(ans === quizData[i].ans) correctCount++; });
+        let score = Math.round((correctCount / quizData.length) * 100);
+        document.getElementById('final-score').innerText = score;
+
+        if(DATABASE_URL && DATABASE_URL.includes("script.google.com")) {
+            document.getElementById('status-upload').innerText = "⏳ Sedang mengirim nilai...";
+            fetch(DATABASE_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                cache: 'no-cache',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name: userName, score: score })
+            })
+            .then(() => {
+                document.getElementById('status-upload').innerText = "✅ Nilai Berhasil Terkirim!";
+                document.getElementById('status-upload').style.color = "var(--success)";
+            })
+            .catch(() => {
+                document.getElementById('status-upload').innerText = "⚠️ Nilai gagal dikirim ke server.";
+                document.getElementById('status-upload').style.color = "var(--danger)";
+            });
+        }
+    }
+</script>
+</body>
+</html>
